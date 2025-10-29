@@ -1,17 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "daisyui";
 
-body {
-  margin: 0;
-  height: 100vh;
-  overflow: hidden;
+#app {
+  width: 100%;
+  min-height: 100vh;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
-
-  color: var(--color-text);
-  --color-body: #ffddee;
-  background-color: var(--color-body);
 }

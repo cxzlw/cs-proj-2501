@@ -18,25 +18,41 @@ watch(
 </script>
 
 <template>
-  <div>
-    {{ engine.fact }}
-  </div>
-  <div v-if="nextMatchedRule">
+  <div
+    class="flex flex-col relative p-8 bg-pink-200 w-sm min-w-5/6 h-2/3 rounded-3xl m-2"
+  >
     <!-- Next matched rule: {{ nextMatchedRule }} -->
-    <div v-if="nextMatchedRule.type === 'question'">
-      <div>
+    <div
+      v-if="nextMatchedRule && nextMatchedRule.type === 'question'"
+      class="flex flex-col items-center"
+    >
+      <h1 class="text-4xl font-bold mb-4 text-center">
         {{ nextMatchedRule.title }}
-      </div>
+      </h1>
+
       <div v-if="nextMatchedRule.content">{{ nextMatchedRule.content }}</div>
-      <div v-if="nextMatchedRule.image">
-        <img :src="nextMatchedRule.image" alt="Question Image" />
-      </div>
-      <div v-for="(option, index) in nextMatchedRule.options" :key="index">
-        <button @click="engine.applyPatch(option.patch)">
+
+      <img
+        v-if="nextMatchedRule.image"
+        :src="nextMatchedRule.image"
+        class="max-h-96"
+        alt="Question Image"
+      />
+
+      <div class="flex flex-col w-full items-stretch mt-16">
+        <button
+          v-for="(option, index) in nextMatchedRule.options"
+          :key="index"
+          @click="engine.applyPatch(option.patch)"
+          class="btn mt-2 my-2"
+        >
           {{ option.description }}
         </button>
       </div>
     </div>
+    <!-- <div>
+      {{ engine.fact }}
+    </div> -->
   </div>
 </template>
 
