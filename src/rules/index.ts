@@ -94,7 +94,7 @@ export const rules: Rule[] = [
     // 当进入 go-ask-for-it-support 状态时，直接提示用户去寻求帮助
     type: "question",
     condition: (fact: Fact) => fact["go-ask-for-it-support"] === true,
-    title: "Go ask IT for help.",
+    title: "Please ask IT for help.",
     options: [
       {
         description: "Done",
