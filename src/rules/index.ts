@@ -29,16 +29,16 @@ export type Rule = ConditionRule | QuestionRule;
 
 export const rules: Rule[] = [
   {
-    // 初始问题，让用户选择遇到的故障
+    // Initial question: let the user choose the issue encountered
     type: "question",
     condition: (
-      fact: Fact, // 规则条件
+      fact: Fact, // Rule condition
     ) =>
-      fact["projector-turns-on"] === undefined && // 1. 四个故障都没被设定
+      fact["projector-turns-on"] === undefined && // 1. None of the four issues are set
       fact["image-displayed"] === undefined &&
       fact["remote-control-works"] === undefined &&
       fact["speaker-works"] === undefined &&
-      (fact["done"] === true || fact["done"] === undefined), // 2. 必须在最开始 / DONE 状态下才触发该规则，避免中途主动遗忘 fact 时的干扰
+      (fact["done"] === true || fact["done"] === undefined), // 2. Trigger only at the beginning or in DONE state to avoid interference when facts are manually cleared mid-flow
     title: "What is the issue with the projector?",
     options: [
       {
@@ -72,7 +72,7 @@ export const rules: Rule[] = [
     ],
   },
   {
-    // DONE 状态下重置所有 fact
+    // Reset all facts when in DONE state
     type: "condition",
     condition: (fact: Fact) => fact["done"] === true,
     patch: {
@@ -91,7 +91,7 @@ export const rules: Rule[] = [
     },
   },
   {
-    // 当进入 go-ask-for-it-support 状态时，直接提示用户去寻求帮助
+    // When entering the go-ask-for-it-support state, directly prompt the user to seek help
     type: "question",
     condition: (fact: Fact) => fact["go-ask-for-it-support"] === true,
     title: "Please ask IT for help.",
@@ -99,13 +99,13 @@ export const rules: Rule[] = [
       {
         description: "Done",
         patch: {
-          done: true, // 用户确认后进入 DONE 状态
+          done: true, // After user confirms, enter DONE state
         },
       },
     ],
   },
   {
-    // 任意问题被解决则进入 DONE 状态
+    // Enter DONE state if any issue is resolved
     type: "condition",
     condition: (fact: Fact) =>
       fact["projector-turns-on"] === true ||

@@ -1,26 +1,26 @@
 export type FactKey =
-  // 四个故障
+  // Four issues
   | "projector-turns-on"
   | "image-displayed"
   | "remote-control-works"
   | "speaker-works"
 
-  // 投影仪 fact
+  // Projector facts
   | "power-indicator-on"
   | "power-button-on"
   | "circuit-breaker-on"
 
-  // 显示 fact
+  // Display facts
   | "input-source-correct"
 
-  // 遥控器 fact
+  // Remote control facts
   | "batteries-functional"
 
-  // 音响 fact
+  // Speaker facts
   | "is-muted"
   | "volume-settings-correct"
 
-  // 特殊状态
+  // Special states
   | "go-ask-for-it-support"
   | "done";
 
